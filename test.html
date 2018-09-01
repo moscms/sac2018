@@ -1,0 +1,71 @@
+<!DOCTYPE >
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="favicon.ico"/>
+<title>测试</title>
+</head>
+
+<body>
+	
+</body>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<!-- <script src="bignumber.min.js"></script> -->
+<script type="text/javascript">
+var BigNumber = require('bignumber.js');
+
+if (typeof web3 !== 'undefined') {
+  web3 = new Web3(web3.currentProvider);
+} else {
+  // set the provider you want from Web3.providers
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+//省略初始化过程
+var version = web3.version.api;
+console.log(version);
+
+var accounts = web3.eth.accounts;
+console.log(accounts);
+
+version = web3.version.node;
+console.log(version);
+
+version = web3.version.network;
+console.log(version);
+
+var connected = web3.isConnected();
+if(!connected){
+  console.log("node not connected!");
+}else{
+  console.log("node connected");
+}
+
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+
+var hash = web3.sha3("Some string to be hashed");
+console.log(hash); 
+var hashOfHash = web3.sha3(hash, {encoding: 'hex'});
+console.log(hashOfHash); 
+
+
+var str = web3.toAscii("0x657468657265756d000000000000000000000000000000000000000000000000");
+console.log(str); 
+
+var str = "abcABC";
+var obj = {abc: 'ABC'};
+var bignumber = new BigNumber('12345678901234567890');
+
+console.log(bignumber);
+
+var hstr = web3.toHex(str);
+var hobj = web3.toHex(obj);
+var hbg = web3.toHex(bignumber);
+
+console.log("Hex of Sring:" + hstr);
+console.log("Hex of Object:" + hobj);
+console.log("Hex of BigNumber:" + hbg);
+</script>
+</html>
+
